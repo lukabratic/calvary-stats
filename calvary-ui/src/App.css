@@ -1,35 +1,29 @@
-.app-container {
-    width: 90%; /* Or a fixed max-width like 1200px */
-    max-width: 1200px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column; /* Arrange header and main content vertically */
-    overflow: hidden; /* Important for border-radius */
-    min-height: 70vh; /* Minimum height for the overall content area */
-    margin: 20px auto; /* Center the container on the page */
-}
-
-.app-header {
-    background-color: #333; /* Dark background for the header */
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: center; /* Center the nav within the header */
-    width: 100%;
-    box-sizing: border-box; /* Include padding in width */
-}
-
-.app-content-area {
-    padding: 20px;
-    flex-grow: 1; /* Allows the content area to take up available space */
-    background-color: #fff; /* Ensure white background for content */
-    overflow-y: auto; /* Add scroll if content exceeds height */
-}
+/* frontend/src/App.css */
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f2f5; /* Light grey background */
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-container {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* app-header styles moved to Header.css */
+/* main-nav styles moved to Header.css */
+
+.app-content-area {
+    padding: 20px;
+    flex-grow: 1; /* Allows the content area to take up available space */
+    background-color: #fff;
+    overflow-y: auto; /* Add scroll if content exceeds height */
 }

@@ -1,60 +1,82 @@
+# backend/calvary-app.py (Relevant sections)
+
 import os
+import sqlite3
 from flask import Flask, jsonify, send_from_directory, request
-from flask_cors import CORS # You'll likely need Flask-CORS for development API calls
+from flask_cors import CORS
 
+# --- Configuration ---
+DATABASE_FILE = 'calvary_stats.db'
+DB_PATH = os.path.join(os.path.dirname(__file__), DATABASE_FILE)
+
+# --- Flask App Setup ---
 app = Flask(__name__, static_folder='../calvary-ui', static_url_path='/')
-# The static_folder should point to your React app's build directory.
-# Assuming your Flask app is in a 'backend' folder and React in 'frontend'
-# like this:
-# project_root/
-# ├── backend/
-# │   └── calvary-app.py
-# └── frontend/
-#     ├── public/
-#     ├── src/
-#     └── build/ # This is where your React app builds to
+CORS(app)
 
-CORS(app) # Enable CORS for all routes (important for development)
+# --- Helper function to get a database connection ---
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row # Makes rows behave like dictionaries
+    return conn
 
-# API routes (your existing backend logic)
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    # Replace with your actual data fetching logic
-    return jsonify({"message": "Hello from Flask backend!"})
+# --- API Routes ---
 
-# Add more API routes for players, teams, etc.
-@app.route('/api/players', methods=['GET'])
-def get_players():
-    # Example: fetch players from a database or a dummy list
-    players = [
-        {"id": 1, "name": "Luka Doncic", "stats": {"points": 33, "assists": 9}},
-        {"id": 2, "name": "Stephen Curry", "stats": {"points": 30, "assists": 6}},
-        # ... more players
-    ]
-    return jsonify(players)
+# API route for player season averages
+@app.route('/api/player_season_averages', methods=['GET'])
+def get_player_season_averages():
+    """
+    Fetches all player season averages from the 'player_season_averages' table.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM player_season_averages")
+    player_averages_data = cursor.fetchall()
+    conn.close()
+    return jsonify([dict(row) for row in player_averages_data])
 
+# API route for player season totals
+@app.route('/api/player_season_totals', methods=['GET'])
+def get_player_season_totals():
+    """
+    Fetches all player season totals from the 'player_season_totals' table.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM player_season_totals")
+    player_totals_data = cursor.fetchall()
+    conn.close()
+    return jsonify([dict(row) for row in player_totals_data])
+
+
+# API route for original 'team_stats' (still dummy data if not explicitly handled)
 @app.route('/api/team_stats', methods=['GET'])
 def get_team_stats():
-    # Example: fetch team stats
-    team_stats = {
-        "wins": 50,
-        "losses": 32,
-        "championships": 1,
-        # ... more stats
-    }
-    return jsonify(team_stats)
+    dummy_team_stats = [
+        {"id": 1, "name": "Team A", "wins": 10, "losses": 5},
+        {"id": 2, "id": "Team B", "wins": 8, "losses": 7},
+    ]
+    return jsonify(dummy_team_stats)
 
 
-# Serve React App
+# API route for players (still dummy data)
+@app.route('/api/players', methods=['GET'])
+def get_players():
+    dummy_players = [
+        {"id": 1, "name": "Luka Doncic", "stats": {"points": 33, "assists": 9}},
+        {"id": 2, "name": "Stephen Curry", "stats": {"points": 30, "assists": 6}},
+    ]
+    return jsonify(dummy_players)
+
+
+# --- Serve React App (Frontend) ---
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    if path != "" and os.path.exists(app.static_folder + '/' + path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, 'index.html')
 
+# --- Main execution block ---
 if __name__ == '__main__':
-    # For development, you'll run the Flask backend separately and the React frontend separately.
-    # When deployed, Flask will serve the React build.
-    app.run(debug=True, port=5000) # Flask typically runs on port 5000
+    app.run(debug=True, port=5000)

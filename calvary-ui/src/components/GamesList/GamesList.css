@@ -1,0 +1,40 @@
+/* frontend/src/components/GamesList/GamesList.css */
+
+.games-list-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.games-list-container h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.games-list-container p {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.game-numbers-list {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 15px; /* Space between list items */
+}
+
+.game-number-item {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.game-number-item:hover {
+    transform: translateY(-3px); /* Little lift effect on hover */
+}

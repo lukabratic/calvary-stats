@@ -1,37 +1,31 @@
-import React, { useState } from 'react';
-import './App.css'; // Or App.module.css if you're using CSS Modules
+// frontend/src/App.js
 
-import Navigation from './components/Navigation/Navigation';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // NavLink is now in Header
+import Header from './components/Header/Header'; // Import the Header component
+import Home from './components/Home/Home'; // Import the Home component
 import PlayersList from './components/PlayersList/PlayersList';
-import TeamStats from './components/TeamStats/TeamStats';
+import GamesList from './components/GamesList/GamesList';
+import './App.css'; // Your main App CSS
 
 function App() {
-    const [activeSection, setActiveSection] = useState('players'); // 'players' or 'teamStats'
-    const [searchTerm, setSearchTerm] = useState(''); // State for the global search
+  const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearchChange = (term) => {
-        setSearchTerm(term);
-    };
+  return (
+    <Router>
+      <div className="app-container"> {/* This is the main container for full page UI */}
+        <Header onSearchChange={setSearchTerm} /> {/* Header now contains navigation and search */}
 
-    return (
-        <div className="app-container">
-            <header className="app-header">
-                <Navigation
-                    activeSection={activeSection}
-                    onSectionChange={setActiveSection}
-                    onSearchChange={handleSearchChange} // Pass search handler
-                    searchTerm={searchTerm} // Pass current search term
-                />
-            </header>
-            <main className="app-content-area">
-                {activeSection === 'players' ? (
-                    <PlayersList searchTerm={searchTerm} />
-                ) : (
-                    <TeamStats />
-                )}
-            </main>
-        </div>
-    );
+        <main className="app-content-area"> {/* Main content area */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/players" element={<PlayersList searchTerm={searchTerm} />} />
+            <Route path="/games" element={<GamesList />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
