@@ -1,0 +1,9 @@
+.team-stats-container {
+    /* Add specific styling for the team stats if needed */
+    color: #555;
+}
+
+.team-stats-container h2 {
+    margin-top: 0;
+    color: #333;
+}

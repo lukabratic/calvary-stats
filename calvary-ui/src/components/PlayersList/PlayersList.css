@@ -1,0 +1,25 @@
+/*.players-list-container {
+     Add specific styling for the players list if needed 
+}*/
+
+.players-list-container h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.players-list-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.players-list-container li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.players-list-container li:last-child {
+    border-bottom: none;
+}

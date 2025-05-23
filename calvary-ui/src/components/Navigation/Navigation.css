@@ -1,0 +1,44 @@
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute items with space between them */
+    width: 100%; /* Take full width of header */
+    max-width: 900px; /* Limit nav width if needed */
+}
+
+.nav-button {
+    background-color: #555;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none; /* Use button, so remove default border */
+    border-radius: 5px;
+    margin-right: 15px; /* Space between buttons */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    font-size: 1em; /* Match input font size */
+}
+
+.nav-button:hover {
+    background-color: #777;
+}
+
+.nav-button.active {
+    background-color: #007bff; /* Highlight for the active button */
+    font-weight: bold;
+}
+
+.search-container {
+    margin-left: auto; /* Pushes the search container to the right */
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 200px; /* Adjust as needed */
+}
