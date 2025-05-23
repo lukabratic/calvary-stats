@@ -1,0 +1,26 @@
+/* frontend/src/components/Home/Home.css */
+
+.home-container {
+    padding: 40px;
+    text-align: center;
+    color: #333;
+}
+
+.home-container h2 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #007bff;
+}
+
+.home-container p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+.home-container .games-list {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between list items */
+}

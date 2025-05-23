@@ -1,0 +1,60 @@
+/* frontend/src/components/Header/Header.css */
+
+.app-header {
+    background-color: #333; /* Dark background for the header */
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center; /* Center the nav within the header */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute items with space between them */
+    width: 100%;
+    max-width: 1200px; /* Max width for content within header */
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px; /* Space between nav buttons */
+}
+
+.nav-button {
+    background-color: #555;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    font-size: 1em;
+}
+
+.nav-button:hover {
+    background-color: #777;
+}
+
+.nav-button.active {
+    background-color: #007bff; /* Highlight for the active button */
+    font-weight: bold;
+}
+
+.search-container {
+    margin-left: auto; /* Pushes the search container to the far right */
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 200px; /* Adjust as needed */
+}
